@@ -6,7 +6,7 @@ on:
   workflow_dispatch:
     inputs:
       full_data:
-        description: Download the private data-v1 asset and reproduce every result table and figure
+        description: Download the data-v1 asset and reproduce every result table and figure
         type: boolean
         default: false
 permissions:

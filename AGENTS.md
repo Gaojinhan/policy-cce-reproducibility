@@ -6,5 +6,5 @@
 - `paper`, `audits`, `outcomes`, `verify` and `unpack` are local-only. No cloud fallback. `demo` uses a separate bounded synthetic configuration and never replaces paper evidence.
 - Require new output directories, preserve failures, and never overwrite release assets or published tags. Use a new version for changed content.
 - Structural/architecture diagrams are outside the reproduction scope. Do not copy manuscript assets or review letters into this repository.
-- Keep this repository private until the authors explicitly approve public release and licenses. GitHub only; no Zenodo or DOI.
+- The authors have approved public GitHub release under MIT. Preserve LICENSE, NOTICE.md and third-party notices. Do not publish unrelated research-tree contents or credentials.
 - Pull before editing an existing clean checkout. Preserve concurrent changes; do not reset, force-push or silently stash user work.

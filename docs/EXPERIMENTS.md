@@ -138,7 +138,7 @@ are integrity records, not a separate public-key signature service.
 ### Before running a formal job
 
 1. Verify the data manifest and the 105-file source copy. Obtain the exact
-   full `campaign-formal.json` specified above from the private `data-v1`
+   full `campaign-formal.json` specified above from the `data-v1`
    GitHub Release into `downloads/campaign-formal.json`. The code package's
    `metadata/formal-rerun-inputs.json` records this extra byte-exact input.
    It is not one of the four contextual metadata files in the current
@@ -162,7 +162,7 @@ are integrity records, not a separate public-key signature service.
 ### Read-only setup check
 
 Run from the repository root, after installing the package and downloading
-the private setup/data assets. This loads the full historical manifest but
+the setup/data assets. This loads the full historical manifest but
 checks only that it agrees with the selected archive. It starts no worker.
 
 ```sh
@@ -236,7 +236,7 @@ a smoke, so it cannot reproduce a formal result.
 
 Do not substitute the historical generic worker for this one-job interface.
 That worker filters families rather than exact IDs and has no complete
-physical-executor provenance override. The private repository's setup
+physical-executor provenance override. The repository's setup
 assets are not permission to restart an old cloud deployment.
 
 ### What a rerun must preserve and report

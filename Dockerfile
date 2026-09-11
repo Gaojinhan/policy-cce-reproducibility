@@ -6,7 +6,7 @@ ENV PYTHONDONTWRITEBYTECODE=1 PYTHONUNBUFFERED=1 \
 WORKDIR /opt/policy-cce
 COPY requirements.lock ./
 RUN python -m pip install --no-cache-dir -r requirements.lock
-COPY pyproject.toml MANIFEST.in README.md ./
+COPY pyproject.toml MANIFEST.in README.md LICENSE NOTICE.md ./
 COPY cmfg_cce ./cmfg_cce
 COPY policy_cce_repro ./policy_cce_repro
 COPY metadata ./metadata

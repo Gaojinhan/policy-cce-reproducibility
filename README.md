@@ -1,15 +1,17 @@
-# Policy-space CCE reproducibility
+# Reproducibility repository
 
-Frozen scientific code, saved experimental data and instructions for the policy-space CCE manuscript. This package reconstructs **13 numerical tables and four result figures** and provides a small simulator example. Structural/architecture diagrams are excluded.
+This is the reproducibility repository for **Simulation-Based Decision Support for Pre-Deployment Evaluation of Cloud Manufacturing Auctions**.
 
-Repository: [Gaojinhan/policy-cce-reproducibility](https://github.com/Gaojinhan/policy-cce-reproducibility). This is an author-controlled **private** repository. Code and documentation are in Git; data are attached to the **data-v1** GitHub Release. No Zenodo archive or DOI is used. See [NOTICE.md](NOTICE.md) before sharing.
+It contains the scientific code, saved experimental data and experiment instructions. The package reconstructs **13 numerical tables and four result figures** and provides a small simulator example. Structural/architecture diagrams are excluded.
+
+Code and documentation are in this repository; data are attached to the **[data-v1 release](https://github.com/Gaojinhan/policy-cce-reproducibility/releases/tag/data-v1)**. The project is available under the [MIT License](LICENSE). See [NOTICE.md](NOTICE.md) for scope and third-party terms.
 
 ## Install
 
-Use Python 3.12. These shell commands work on macOS, Linux and Windows through WSL2. GitHub CLI access is needed to clone/download while private; the scientific commands need no cloud credentials.
+Use Python 3.12. These shell commands work on macOS, Linux and Windows through WSL2. Public downloads and the scientific commands need no account or cloud credentials.
 
 ```sh
-gh repo clone Gaojinhan/policy-cce-reproducibility
+git clone https://github.com/Gaojinhan/policy-cce-reproducibility.git
 cd policy-cce-reproducibility
 python3.12 -m venv .venv
 .venv/bin/python -m pip install -r requirements.lock
@@ -29,8 +31,9 @@ This runs a small synthetic game, computes distributions with the full LP and DS
 Download and extract the data once:
 
 ```sh
-gh release download data-v1 --repo Gaojinhan/policy-cce-reproducibility \
-  --pattern policy-cce-data-v1.tar.gz --dir downloads
+mkdir -p downloads
+curl -fL --output downloads/policy-cce-data-v1.tar.gz \
+  https://github.com/Gaojinhan/policy-cce-reproducibility/releases/download/data-v1/policy-cce-data-v1.tar.gz
 .venv/bin/policy-cce-repro unpack \
   --archive downloads/policy-cce-data-v1.tar.gz --output data
 ```
@@ -59,12 +62,12 @@ Every run needs a **new output directory**. Missing input or a numerical mismatc
 The image defaults to help, not a worker, and uses no private image registry. Docker must already be running.
 
 ```sh
-docker build -t policy-cce-repro:0.3.0 .
+docker build -t policy-cce-repro:0.3.1 .
 mkdir -p outputs
 docker run --rm --network none --read-only --tmpfs /tmp \
   --user "$(id -u):$(id -g)" \
   --mount "type=bind,source=$(pwd)/outputs,target=/out" \
-  policy-cce-repro:0.3.0 demo --output /out/demo-docker-001
+  policy-cce-repro:0.3.1 demo --output /out/demo-docker-001
 ```
 
 After downloading and unpacking the data above:
@@ -74,7 +77,7 @@ docker run --rm --network none --read-only --tmpfs /tmp \
   --user "$(id -u):$(id -g)" \
   --mount "type=bind,source=$(pwd)/data/offline-inputs-v1,target=/data,readonly" \
   --mount "type=bind,source=$(pwd)/outputs,target=/out" \
-  policy-cce-repro:0.3.0 paper --data /data --output /out/paper-docker-001 --workers 2
+  policy-cce-repro:0.3.1 paper --data /data --output /out/paper-docker-001 --workers 2
 ```
 
 Inputs are read-only, networking is disabled during computation, and no host credential directory is mounted. These commands do not start an old experiment container. The official Python base is pinned by digest. Reporting dependencies are pinned in `requirements.lock`; no proprietary host font is bundled.
@@ -110,6 +113,6 @@ Logical node IDs and actual executor identities are separate. The 96 selected Ru
 .venv/bin/python -m pytest
 ```
 
-Default tests use synthetic inputs. The optional full-data benchmark test requires `POLICY_CCE_TEST_DATA` and `POLICY_CCE_TEST_AUDIT_REPORT`. GitHub Actions runs the tests, small example and offline Docker demo. Its manual `full_data` option also downloads the private Release data and rebuilds every selected display in the container.
+Default tests use synthetic inputs. The optional full-data benchmark test requires `POLICY_CCE_TEST_DATA` and `POLICY_CCE_TEST_AUDIT_REPORT`. GitHub Actions runs the tests, small example and offline Docker demo. Its manual `full_data` option also downloads the Release data and rebuilds every selected display in the container.
 
-Actual outcomes are recorded in [Actions](https://github.com/Gaojinhan/policy-cce-reproducibility/actions) and versioned release evidence. [VALIDATION.md](docs/VALIDATION.md) preserves earlier local-stage checks. [THIRD_PARTY_NOTICES.md](docs/THIRD_PARTY_NOTICES.md) records dependency notices and the private-use boundary.
+Actual outcomes are recorded in [Actions](https://github.com/Gaojinhan/policy-cce-reproducibility/actions) and versioned release evidence. [VALIDATION.md](docs/VALIDATION.md) preserves earlier checks. [THIRD_PARTY_NOTICES.md](docs/THIRD_PARTY_NOTICES.md) records dependency notices.

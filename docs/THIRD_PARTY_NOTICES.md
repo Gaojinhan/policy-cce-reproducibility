@@ -1,10 +1,9 @@
-# Third-party notices and release boundaries
+# Third-party notices
 
-This package is prepared for a private GitHub repository and versioned
-GitHub releases. No Zenodo archive or DOI is planned. This notice does not
-grant any additional right to reuse the project's source, data, manuscript,
-or figures. No MIT, Creative Commons, or other project-wide license has
-been assigned. A future license requires the rights holders' decision.
+The authors' material is available under the [MIT License](../LICENSE),
+with the scope stated in [NOTICE.md](../NOTICE.md). Third-party dependencies
+and fonts retain their own licenses. The project license does not replace
+those terms.
 
 ## Project source and data
 
@@ -12,8 +11,7 @@ been assigned. A future license requires the rights holders' decision.
 `metadata/source-copy-manifest.json`. `policy_cce_repro/` contains the
 reproduction adapters. The copy manifest records provenance and integrity;
 it is not evidence of a third party's permission to redistribute material.
-The authors must confirm the applicable ownership and institutional terms
-before changing repository visibility or granting a reuse license.
+The authors have authorized the public release and MIT license.
 
 The bounded source review found no separately vendored dependency tree in
 the scientific/adaptor source directories. This is not a complete legal
@@ -22,11 +20,10 @@ own, establish whether every implementation was independently written.
 Any copied implementation must retain its original notices and permission
 terms once identified.
 
-The separate data archive retains original job records and provenance.
-Source-code permission does not automatically cover data or figure reuse.
-Any third-party industrial inputs, reports, copied illustrations, or
-confidential records require their own review. Structural manuscript
-diagrams and the manuscript are outside the numerical reproduction package.
+The separate data archive retains original simulation records and provenance.
+The project license covers the authors' generated data and result figures.
+It does not grant rights to external industry reports, third-party materials,
+the manuscript or its structural diagrams.
 
 ## Direct dependencies
 
@@ -82,14 +79,12 @@ credential-pattern match in the tests is synthetic test material. Generic
 `gs://` strings and optional credential-loading code in the historical cloud
 modules are interfaces, not included credentials.
 
-This scan does not clear the separate data archive, local build/test logs,
-or every validation record for public release. These can contain hostnames,
-absolute paths, project names, and original executor metadata. Review the
-exact files selected for upload; do not include `.venv`, local caches,
-credential directories, authentication files, or machine-specific logs by
-copying a whole working directory. Keep the repository private while that
-review is incomplete. Preserve any original scientific records; make a
-separately documented shareable copy if redaction is needed.
+The data archive was scanned separately; see [DATA.md](DATA.md). Original
+records can contain hostnames, local paths, project identifiers and executor
+metadata, which are preserved as provenance. A targeted scan is not a
+guarantee that all possible sensitive information has been detected. Do not
+add `.venv`, local caches, credential directories or authentication files to
+future releases.
 
 ## Historical cloud and compatibility modules
 

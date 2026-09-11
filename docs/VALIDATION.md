@@ -6,7 +6,7 @@ Validation date: 2026-09-11. This is a saved-data and packaging check, not a rer
 
 The bounded simulator demo and complete saved-data reconstruction have passed on macOS ARM64 and in a Linux/AMD64 Docker container on GitHub Actions. Container computation runs with networking disabled and data mounted read-only. The data-v1 release archive was downloaded, checksum-verified and unpacked by the Linux runner. The versioned code release includes `release-validation.json` with the exact tested commit, Actions run, test counts and output hashes.
 
-The sections below retain the earlier local checks and their original artifact identities. Statements about work pending at those stages are historical. Public visibility, reuse licensing and a full formal-campaign rerun are outside the completed private release. GitHub is the only publication destination; no Zenodo archive or DOI is planned.
+The sections below retain the earlier checks and their original artifact identities. Version 0.3.1 adds the paper title, public access instructions and MIT licensing; the scientific code and data are unchanged. Historical validation records describe the repository status at their creation. Current reuse terms are in [NOTICE.md](../NOTICE.md).
 
 ## Scientific parity
 
@@ -51,6 +51,6 @@ PDF byte equality across environments is not required: PDF timestamps, installed
 
 ## What this does not verify
 
-The saved-data validation does not rerun payoff simulation, LP solves, training or original Runtime measurements. Runtime and parameter-robustness results are verified as archived records. The separate bounded demo performs a small synthetic simulation and LP solve; it does not reproduce a formal paper experiment. Full formal-job execution, public-data review and additional reuse licensing remain outside this private release.
+The saved-data validation does not rerun payoff simulation, LP solves, training or original Runtime measurements. Runtime and parameter-robustness results are verified as archived records. The separate bounded demo performs a small synthetic simulation and LP solve; it does not reproduce a formal paper experiment. A full formal-campaign rerun is outside this release validation.
 
 Saved statistical parity does not fill missing actual-executor provenance or establish that a historical scientific result should be interpreted more broadly than the fixed case and policy library.
