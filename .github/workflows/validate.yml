@@ -1,0 +1,64 @@
+name: Reproducibility checks
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+    inputs:
+      full_data:
+        description: Download the private data-v1 asset and reproduce every result table and figure
+        type: boolean
+        default: false
+permissions:
+  contents: read
+jobs:
+  validate:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    env:
+      OPENBLAS_NUM_THREADS: '1'
+      OMP_NUM_THREADS: '1'
+      MKL_NUM_THREADS: '1'
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: '3.12.14'
+      - name: Install pinned dependencies and package
+        run: |
+          python -m pip install -r requirements.lock
+          python -m pip install '.[test]'
+      - name: Unit and integrity tests
+        run: python -m pytest --junitxml=test-results/tests.xml
+      - name: Bounded synthetic demo
+        run: policy-cce-repro demo --output test-results/demo
+      - name: Build isolated reader container
+        run: docker build --tag policy-cce:ci .
+      - name: Container demo with networking disabled
+        run: |
+          mkdir -p "$RUNNER_TEMP/container-output"
+          docker run --rm --network none --read-only --cpus 2 --memory 4g --pids-limit 256 --tmpfs /tmp:rw,size=128m --user "$(id -u):$(id -g)" --mount "type=bind,source=$RUNNER_TEMP/container-output,target=/out" policy-cce:ci demo --output /out/demo
+          cp -R "$RUNNER_TEMP/container-output/demo" test-results/container-demo
+      - name: Download declared result data
+        if: github.event_name == 'workflow_dispatch' && inputs.full_data
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh release download data-v1 --repo "$GITHUB_REPOSITORY" --pattern policy-cce-data-v1.tar.gz --dir "$RUNNER_TEMP/downloads"
+      - name: Verify and unpack locally
+        if: github.event_name == 'workflow_dispatch' && inputs.full_data
+        run: policy-cce-repro unpack --archive "$RUNNER_TEMP/downloads/policy-cce-data-v1.tar.gz" --output "$RUNNER_TEMP/paper-data"
+      - name: Reproduce all paper outputs inside offline container
+        if: github.event_name == 'workflow_dispatch' && inputs.full_data
+        run: |
+          docker run --rm --network none --read-only --cpus 2 --memory 4g --pids-limit 256 --tmpfs /tmp:rw,size=128m --user "$(id -u):$(id -g)" --mount "type=bind,source=$RUNNER_TEMP/paper-data/offline-inputs-v1,target=/data,readonly" --mount "type=bind,source=$RUNNER_TEMP/container-output,target=/out" policy-cce:ci paper --data /data --output /out/paper --workers 2
+          cp -R "$RUNNER_TEMP/container-output/paper" test-results/paper
+          policy-cce-repro verify --data "$RUNNER_TEMP/paper-data/offline-inputs-v1"
+      - name: Preserve test evidence
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: validation-evidence
+          path: test-results/
+          retention-days: 14

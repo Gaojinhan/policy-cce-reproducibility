@@ -1,0 +1,85 @@
+experiment: reviewer_layer2_robustness
+run_budget_label: paper_run
+env_version: full_v1
+availability_shocks: true
+
+population:
+  name: balanced
+  capacity_range: [50.0, 200.0]
+  c_base_range: [1.0, 5.0]
+  c_setup_range: [5.0, 20.0]
+  p_out_range: [0.05, 0.20]
+  alpha_range: [0.1, 1.5]
+
+orders:
+  workload_range: [5, 50]
+  due_date_range: [5, 30]
+
+external_jobs:
+  workload: [5, 30]
+  duration: [3, 15]
+  revenue_multiplier: 1.2
+
+policies:
+  markup_grid: [0.05, 0.10, 0.15, 0.20, 0.25, 0.30, 0.40]
+  lead_time_grid: [0.55, 0.70, 0.85, 1.00]
+
+mechanisms:
+  - M1_price_first
+  - M2_price_critical
+  - M3_delivery_first
+  - M4_delivery_critical
+
+mechanism_defaults:
+  reserve_price_multiplier: 1.75
+  single_bidder_markup_cap: 0.20
+  rho: 2.0
+  gamma: 0.99
+  beta_p: 0.6
+  beta_l: 0.4
+
+pair_repair:
+  N_values: [4, 6]
+  policies_per_agent: [6]
+  horizon: 200
+  rollouts_initial: 10
+  seeds: [0, 1, 2]
+  solvers:
+    - SAD-CCE
+    - REPAIR-PAIR-SAD-CCE
+
+solver:
+  target_gap: 1.0
+  rollouts_max: 100
+  active_sampling: true
+  workers: 8
+  initial_support_size: 10
+  max_support_size: 32
+  support_add_batch_size: 6
+  max_rounds: 4
+  beam_width: 20
+  pair:
+    beta: 1.96
+    n_min_pair_samples: 8
+    active_rounds: 4
+    top_constraints: 8
+    top_pairs_per_constraint: 16
+    batch_samples_per_pair: 4
+    q_min: 1.0e-4
+    use_common_random_numbers: true
+  repair:
+    repair_rounds: 3
+    top_constraints: 5
+    top_profiles_per_constraint: 20
+    q_min: 1.0e-4
+    mean_threshold: 1.0
+    contribution_min: 0.0
+    enable_multi_agent_repair: true
+    max_agents_repaired_per_profile: 2
+    beam_width: 16
+    profile_budget_multiplier: 2.0
+    targeted_deviation_policies:
+      M1_price_first: [P6, P3]
+      M2_price_critical: [P6, P3]
+      M3_delivery_first: [D5]
+      M4_delivery_critical: [D1, D5]

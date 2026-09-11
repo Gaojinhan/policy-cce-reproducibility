@@ -1,0 +1,136 @@
+experiment: cnc_route_case_v2
+run_budget_label: frozen_cnc_main_v2
+
+# The calibration seed is never included in a reported main-game aggregate.
+calibration_seed: 271828
+main_seeds: [0, 1, 2]
+
+auction_treatments:
+  AUC1: M1_price_first
+  AUC2: M2_price_critical
+  AUC3: M3_delivery_first
+  AUC4: M4_delivery_critical
+
+policies:
+  policies_per_agent: 6
+  markup_grid: [0.05, 0.10, 0.15, 0.20, 0.25, 0.30, 0.40]
+  lead_time_grid: [0.55, 0.70, 0.85, 1.00]
+
+route_environment:
+  horizon: 60
+  gamma: 0.99
+  rho: 2.0
+  capacity_window_hours: 16.0
+  reference_machine_hours_per_period: 3.0
+  due_slack_range: [1.4, 2.2]
+  outside_burn_in: 20
+  outside_decay: 0.85
+  outside_volatility: 0.015
+  max_outside_pressure: 0.60
+  rate_decay: 0.85
+  rate_volatility: 0.025
+  rate_multiplier_bounds: [0.85, 1.15]
+  effective_rate_scale: 1.0
+  cost_scale: 1.0
+  beta_p: 0.6
+  beta_l: 0.4
+  reserve_price_multiplier: 1.75
+  single_bidder_markup_cap: 0.20
+  env_version: route_capacity_v2
+  fleet_version: cnc_fleet_v2
+  order_generator_version: cnc_orders_v1
+
+factorial:
+  load_levels: [nominal, high]
+  route_mixes: [balanced, bottleneck_heavy]
+  outside_regimes: [normal, critical_machine]
+  rollouts_per_profile: 20
+  holdout_rollouts: 50
+  workers: 8
+
+# One global DSS budget is frozen before the formal mechanism comparisons.
+# It is shared by every pressure cell, auction treatment, and reporting seed.
+dss:
+  solver: REPAIR-SAD-CCE
+  target_gap: 1.0e-8
+  active_sampling: false
+  rollouts_max: 20
+  initial_support_size: 24
+  max_support_size: 180
+  support_add_batch_size: 16
+  max_rounds: 5
+  repair:
+    repair_rounds: 3
+    top_constraints: 5
+    top_profiles_per_constraint: 24
+    q_min: 1.0e-4
+    mean_threshold: 1.0
+    contribution_min: 0.0
+    enable_multi_agent_repair: true
+    max_agents_repaired_per_profile: 2
+    beam_width: 24
+    profile_budget_multiplier: 2.0
+    targeted_deviation_policies:
+      M1_price_first: [A6, A3]
+      M2_price_critical: [A6, A3]
+      M3_delivery_first: [A5]
+      M4_delivery_critical: [A1, A5]
+
+pilot:
+  # The all-A2 profile provides a treatment-independent capacity-reservation
+  # load check before any mechanism result is inspected.  A coverage gate is
+  # passed only when the rollout-clustered one-sided 95% lower bound clears the
+  # frozen cell threshold.
+  # AUC3/all-A2 is the most capacity-demanding homogeneous A1--A6 profile
+  # found in the pre-result capacity audit; AUC4 is mechanically identical for
+  # this check.  This choice is frozen without inspecting treatment rankings.
+  calibration_treatment: AUC3
+  calibration_profile: A2
+  confidence_level: 0.95
+  coverage_cells:
+    nominal__balanced__normal: 0.80
+    nominal__balanced__critical_machine: 0.70
+    nominal__bottleneck_heavy__normal: 0.70
+    nominal__bottleneck_heavy__critical_machine: 0.70
+    high__balanced__normal: 0.70
+    high__balanced__critical_machine: 0.70
+    high__bottleneck_heavy__normal: 0.70
+    high__bottleneck_heavy__critical_machine: 0.70
+  # One complete 6^4 table with a single rollout/profile times the new backend
+  # without entering any reported result.  Main settings are not tuned from
+  # AUC rankings.
+  complete_game_policies_per_agent: 6
+  rollouts_per_profile: 1
+  episode_rollouts: 50
+  dss_rollouts_per_profile: 3
+  dss_cells:
+    - nominal__balanced__normal
+    - high__bottleneck_heavy__critical_machine
+
+bridge:
+  cells:
+    - nominal__balanced__normal
+    - high__bottleneck_heavy__critical_machine
+
+policy_transplant:
+  pairs:
+    - [AUC1, AUC2]
+    - [AUC3, AUC4]
+
+sensitivity:
+  base_cell: nominal__balanced__normal
+  variants:
+    rate_minus_15:
+      effective_rate_scale: 0.85
+      cost_scale: 1.0
+    rate_plus_15:
+      effective_rate_scale: 1.15
+      cost_scale: 1.0
+    cost_minus_15:
+      effective_rate_scale: 1.0
+      cost_scale: 0.85
+    cost_plus_15:
+      effective_rate_scale: 1.0
+      cost_scale: 1.15
+
+checkpoint_every_profiles: 64

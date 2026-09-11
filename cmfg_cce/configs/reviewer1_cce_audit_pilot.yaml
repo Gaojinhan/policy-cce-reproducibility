@@ -1,0 +1,39 @@
+experiment: reviewer1_cce_audit_pilot
+source_root: outputs/policy_library_full_queue_20260613_213147_policy_library_full
+output_root: outputs/reviewer1_cce_audit_pilot
+
+solvers:
+  - REPAIR-SAD-CCE
+  - FullTensor-CCE-LP
+
+audit:
+  seed_offset: 10000000
+  nested_rollouts: [20, 50, 100, 200, 400, 800, 1000]
+  bootstrap_samples: 2000
+  alpha: 0.05
+  workers: 8
+  low_gap_percent: 1.0
+  interval_width_percent: 2.0
+  dss_excess_percent: 1.0
+  convergence_change_percent: 0.5
+  adaptive_extension:
+    enabled: true
+    convergence_from: 800
+    convergence_to: 1000
+    change_threshold_percent: 0.5
+    interval_width_threshold_percent: 2.0
+    extension_rollouts: [1500, 2000]
+
+cases:
+  - {N: 4, J: 6, seed: 0, mechanism: M1_price_first, stratum: small_scale}
+  - {N: 4, J: 6, seed: 0, mechanism: M2_price_critical, stratum: small_scale}
+  - {N: 4, J: 6, seed: 0, mechanism: M3_delivery_first, stratum: small_scale}
+  - {N: 4, J: 6, seed: 0, mechanism: M4_delivery_critical, stratum: small_scale}
+  - {N: 6, J: 8, seed: 0, mechanism: M1_price_first, stratum: largest_scale}
+  - {N: 6, J: 8, seed: 0, mechanism: M2_price_critical, stratum: largest_scale}
+  - {N: 6, J: 8, seed: 0, mechanism: M3_delivery_first, stratum: largest_scale}
+  - {N: 6, J: 8, seed: 0, mechanism: M4_delivery_critical, stratum: largest_scale}
+  - {N: 5, J: 6, seed: 0, mechanism: M2_price_critical, stratum: dss_fullspace_difference}
+  - {N: 5, J: 6, seed: 1, mechanism: M4_delivery_critical, stratum: dss_fullspace_difference}
+  - {N: 5, J: 8, seed: 0, mechanism: M2_price_critical, stratum: dss_fullspace_difference}
+  - {N: 5, J: 8, seed: 1, mechanism: M2_price_critical, stratum: dss_fullspace_difference}

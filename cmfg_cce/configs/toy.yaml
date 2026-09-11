@@ -1,0 +1,38 @@
+experiment: toy_correctness
+run_budget_label: paper_run
+env_version: layer0_toy_v1
+
+population:
+  name: toy_balanced
+  capacity_range: [70.0, 130.0]
+  c_base_range: [1.0, 4.0]
+  c_setup_range: [4.0, 12.0]
+
+orders:
+  workload_range: [5, 35]
+  due_date_range: [5, 25]
+
+mechanisms:
+  - M1_price_first
+  - M2_price_critical
+
+toy:
+  N_values: [3, 4]
+  policies_per_agent: [4, 6]
+  horizon: 30
+  rollouts_per_profile: 20
+  seeds: [0, 1, 2]
+
+solver:
+  objective_mode: platform_operating_score
+  target_gap: 1.0e-8
+  sad_initial_support_size: 8
+  sad_max_support_size: 48
+  sad_support_add_batch_size: 8
+  sad_max_rounds: 8
+
+mechanism_defaults:
+  reserve_price_multiplier: 1.75
+  single_bidder_markup_cap: 0.20
+  rho: 2.0
+  gamma: 0.99

@@ -1,0 +1,970 @@
+{
+  "schema": "policy_cce_paper_display_contract_v1",
+  "manuscript_commit": "45d3a588672b54799a3c6393938b275a67dddc3b",
+  "manuscript_sha256": "1769a156c41f26fa53834ba05d5c98db4c1c4c5bc96af7515b32da35d1a412e3",
+  "purpose": "Display validation only; never used as numerical reconstruction input",
+  "reference_labels": {"eq:relative_gap": "11", "sec:evaluation_settings": "5.2", "sec:mechanism_comparison": "5.7"},
+  "reference_label_source": "Read-only cross-check against current manuscript main.aux; presentation references only",
+  "tables": {
+    "tab:solver_results": {
+      "number": 4,
+      "caption": "Solver accuracy and computational effort across the six benchmark scales.",
+      "block_sha256": "c68ada6a2f4ced69c8ba48499c7b691aea9756e2cbefe9ca1a19e5febd03e3af",
+      "expected_numeric_rows": [
+        [
+          "4",
+          "6",
+          "0.07",
+          "0.24",
+          "0.9",
+          "1296",
+          "0.0",
+          "1.25"
+        ],
+        [
+          "0.07",
+          "0.24",
+          "0.9",
+          "1296",
+          "0.0",
+          "1.42"
+        ],
+        [
+          "51.98",
+          "15.87",
+          "0.9",
+          "87",
+          "93.3",
+          "4.25"
+        ],
+        [
+          "0.07",
+          "0.24",
+          "0.8",
+          "998",
+          "23.0",
+          "1.00"
+        ],
+        [
+          "4",
+          "8",
+          "0.07",
+          "0.24",
+          "2.6",
+          "4096",
+          "0.0",
+          "1.42"
+        ],
+        [
+          "0.07",
+          "0.24",
+          "2.6",
+          "4096",
+          "0.0",
+          "1.42"
+        ],
+        [
+          "60.26",
+          "34.74",
+          "1.5",
+          "148",
+          "96.4",
+          "5.25"
+        ],
+        [
+          "0.07",
+          "0.24",
+          "1.4",
+          "1893",
+          "53.8",
+          "1.00"
+        ],
+        [
+          "5",
+          "6",
+          "0.17",
+          "0.34",
+          "5.7",
+          "7776",
+          "0.0",
+          "2.25"
+        ],
+        [
+          "0.17",
+          "0.34",
+          "5.7",
+          "7776",
+          "0.0",
+          "2.25"
+        ],
+        [
+          "45.22",
+          "27.46",
+          "2.0",
+          "168",
+          "97.8",
+          "6.58"
+        ],
+        [
+          "0.10",
+          "0.26",
+          "1.8",
+          "2011",
+          "74.1",
+          "2.00"
+        ],
+        [
+          "5",
+          "8",
+          "0.17",
+          "0.34",
+          "28.7",
+          "32768",
+          "0.0",
+          "2.25"
+        ],
+        [
+          "0.17",
+          "0.34",
+          "29.1",
+          "32768",
+          "0.0",
+          "2.42"
+        ],
+        [
+          "45.04",
+          "24.05",
+          "3.1",
+          "259",
+          "99.2",
+          "7.25"
+        ],
+        [
+          "0.07",
+          "0.15",
+          "3.0",
+          "3162",
+          "90.4",
+          "2.17"
+        ],
+        [
+          "6",
+          "6",
+          "0.22",
+          "0.56",
+          "43.1",
+          "46656",
+          "0.0",
+          "1.25"
+        ],
+        [
+          "0.22",
+          "0.56",
+          "43.1",
+          "46656",
+          "0.0",
+          "2.17"
+        ],
+        [
+          "46.35",
+          "16.67",
+          "2.8",
+          "208",
+          "99.6",
+          "6.75"
+        ],
+        [
+          "0.22",
+          "0.56",
+          "2.6",
+          "2707",
+          "94.2",
+          "1.08"
+        ],
+        [
+          "6",
+          "8",
+          "0.22",
+          "0.56",
+          "229.8",
+          "262144",
+          "0.0",
+          "1.50"
+        ],
+        [
+          "0.22",
+          "0.56",
+          "230.6",
+          "262144",
+          "0.0",
+          "2.00"
+        ],
+        [
+          "55.73",
+          "13.50",
+          "3.9",
+          "294",
+          "99.9",
+          "6.83"
+        ],
+        [
+          "0.10",
+          "0.26",
+          "3.6",
+          "4142",
+          "98.4",
+          "1.17"
+        ]
+      ]
+    },
+    "tab:solver_benchmark_summary": {
+      "number": 5,
+      "caption": "Aggregate solver results across the 72 paired benchmark games.",
+      "block_sha256": "9dcaaab64ec08618da552258cc17ea8bc2467e923505e3f8306b47f321ff6e0e",
+      "expected_numeric_rows": [
+        [
+          "0.15",
+          "1.82",
+          "16.08"
+        ],
+        [
+          "0.15",
+          "1.82",
+          "16.16"
+        ],
+        [
+          "50.76",
+          "119.92",
+          "1.08"
+        ],
+        [
+          "0.11",
+          "1.82",
+          "1.00"
+        ]
+      ]
+    },
+    "tab:solver_uncertainty": {
+      "number": 6,
+      "caption": "Simulation uncertainty in the independently evaluated DSS-CCE results.",
+      "block_sha256": "6a004e7f4f761ecdd105b16ed998385b5af3de9c5dc52a2e836af2cc24bc1f12",
+      "expected_numeric_rows": [
+        [
+          "4",
+          "6",
+          "0.83",
+          "2.24",
+          "0.63",
+          "1.70",
+          "0.00",
+          "0.83",
+          "0.00",
+          "1.36"
+        ],
+        [
+          "4",
+          "8",
+          "0.83",
+          "2.24",
+          "0.65",
+          "1.70",
+          "0.00",
+          "0.83",
+          "0.00",
+          "1.38"
+        ],
+        [
+          "5",
+          "6",
+          "0.84",
+          "2.15",
+          "0.67",
+          "1.85",
+          "0.00",
+          "0.83",
+          "0.00",
+          "1.74"
+        ],
+        [
+          "5",
+          "8",
+          "0.84",
+          "2.20",
+          "0.67",
+          "1.85",
+          "0.00",
+          "0.50",
+          "0.00",
+          "1.43"
+        ],
+        [
+          "6",
+          "6",
+          "0.67",
+          "4.14",
+          "0.47",
+          "3.38",
+          "0.00",
+          "1.82",
+          "0.00",
+          "2.73"
+        ],
+        [
+          "6",
+          "8",
+          "0.67",
+          "4.14",
+          "0.47",
+          "3.38",
+          "0.00",
+          "0.86",
+          "0.00",
+          "1.76"
+        ]
+      ]
+    },
+    "tab:nonpure_cases": {
+      "number": 7,
+      "caption": "DSS-CCE results for the six benchmark games without a pure Nash equilibrium in the training game.",
+      "block_sha256": "f8fbda2b9b9794b48894d0262c12ec135fa89610eb4c05d16f5c5fa5429d3b2f",
+      "expected_numeric_rows": [
+        [
+          "5",
+          "6",
+          "1",
+          "4",
+          "1.044",
+          "0.008"
+        ],
+        [
+          "5",
+          "6",
+          "1",
+          "4",
+          "3.124",
+          "0.829"
+        ],
+        [
+          "5",
+          "6",
+          "2",
+          "6",
+          "1.230",
+          "0.419"
+        ],
+        [
+          "5",
+          "8",
+          "1",
+          "6",
+          "1.932",
+          "0.499"
+        ],
+        [
+          "5",
+          "8",
+          "1",
+          "5",
+          "1.782",
+          "0.144"
+        ],
+        [
+          "5",
+          "8",
+          "2",
+          "6",
+          "1.553",
+          "0.161"
+        ]
+      ]
+    },
+    "tab:scalability_exact_runtime": {
+      "number": 8,
+      "caption": "Computational effort at $(N,J)=(7,6)$.",
+      "block_sha256": "00eb524342b0ececdca8d4afe1faae1662718e18fd0fa132fb347a62d287f9da",
+      "expected_numeric_rows": [
+        [
+          "274.2",
+          "29.7",
+          "279936",
+          "0.0"
+        ],
+        [
+          "274.5",
+          "25.5",
+          "279936",
+          "0.0"
+        ],
+        [
+          "4.1",
+          "0.5",
+          "279",
+          "99.9"
+        ],
+        [
+          "3.8",
+          "0.5",
+          "3633",
+          "98.7"
+        ]
+      ]
+    },
+    "tab:cnc_audit": {
+      "number": 11,
+      "caption": "Independent gaps in the CNC case study.",
+      "block_sha256": "524f0441710610d8ec74c2dad7f2b1b6a2dfe2e0f924fd72497dae056c3fa401",
+      "expected_numeric_rows": [
+        [
+          "24",
+          "0.31",
+          "1.88",
+          "0.39",
+          "0.51",
+          "0.00",
+          "2.60"
+        ],
+        [
+          "24",
+          "0.44",
+          "2.15",
+          "0.47",
+          "1.01",
+          "0.00",
+          "3.13"
+        ],
+        [
+          "24",
+          "0.35",
+          "1.12",
+          "0.43",
+          "0.61",
+          "0.00",
+          "1.87"
+        ],
+        [
+          "24",
+          "0.27",
+          "1.89",
+          "0.50",
+          "1.00",
+          "0.00",
+          "3.13"
+        ],
+        [
+          "96",
+          "0.34",
+          "2.15",
+          "0.39",
+          "1.01",
+          "0.00",
+          "3.13"
+        ]
+      ]
+    },
+    "tab:transplant": {
+      "number": 12,
+      "caption": "Policy-transplant results across payment rules.",
+      "block_sha256": "1ebd230a7559c5c6a2b933e47e866167d5d4030bd4c53e4db10de047f30d23c4",
+      "expected_numeric_rows": [
+        [
+          "0.33",
+          "12.02",
+          "0.46",
+          "11.69"
+        ],
+        [
+          "0.46",
+          "42.91",
+          "0.33",
+          "42.45"
+        ],
+        [
+          "0.32",
+          "13.73",
+          "0.28",
+          "13.41"
+        ],
+        [
+          "0.28",
+          "48.48",
+          "0.32",
+          "48.20"
+        ]
+      ]
+    },
+    "tab:cnc_mechanism_relative": {
+      "number": 13,
+      "caption": "Relative effects of payment rules and bid formats.",
+      "block_sha256": "a2aff64041836c7881820daaa473a49b6ebdc533f32bce7a1c8088dd7c350e69",
+      "expected_numeric_rows": [
+        [
+          "3.78",
+          "3.75",
+          "3.81",
+          "4.39",
+          "4.36",
+          "4.43"
+        ],
+        [
+          "31.73",
+          "31.50",
+          "31.96",
+          "30.38",
+          "30.13",
+          "30.62"
+        ],
+        [
+          "-0.02",
+          "-0.02",
+          "-0.01",
+          "0.33",
+          "0.31",
+          "0.34"
+        ],
+        [
+          "45.00",
+          "44.45",
+          "45.54",
+          "41.41",
+          "40.85",
+          "41.94"
+        ],
+        [
+          "-1.60",
+          "-1.64",
+          "-1.58",
+          "0.21",
+          "0.17",
+          "0.24"
+        ],
+        [
+          "-9.15",
+          "-9.17",
+          "-9.14",
+          "-15.69",
+          "-15.71",
+          "-15.67"
+        ],
+        [
+          "-1.02",
+          "-1.03",
+          "-1.02"
+        ],
+        [
+          "-0.36",
+          "-0.37",
+          "-0.35",
+          "0.23",
+          "0.22",
+          "0.24"
+        ],
+        [
+          "0.36",
+          "0.33",
+          "0.39",
+          "-0.67",
+          "-0.73",
+          "-0.61"
+        ],
+        [
+          "-0.33",
+          "-0.35",
+          "-0.31",
+          "0.01",
+          "0.01",
+          "0.02"
+        ],
+        [
+          "-0.24",
+          "-0.48",
+          "-0.01",
+          "-2.72",
+          "-2.95",
+          "-2.49"
+        ],
+        [
+          "-1.91",
+          "-1.95",
+          "-1.87",
+          "-0.10",
+          "-0.12",
+          "-0.08"
+        ],
+        [
+          "9.89",
+          "9.87",
+          "9.91",
+          "1.98",
+          "1.97",
+          "1.99"
+        ]
+      ]
+    },
+    "tab:cnc_capacity_paired": {
+      "number": 14,
+      "caption": "Operating-factor effects and confidence intervals.",
+      "block_sha256": "32c187721c90831c17f019620ec7ee4d1b62e01a940d2ccdcb88caf2253e3c9a",
+      "expected_numeric_rows": [
+        [
+          "0.27",
+          "0.25",
+          "0.29"
+        ],
+        [
+          "9.66",
+          "9.50",
+          "9.81"
+        ],
+        [
+          "16.54",
+          "16.24",
+          "16.83"
+        ],
+        [
+          "15.04",
+          "14.86",
+          "15.21"
+        ],
+        [
+          "0.193",
+          "0.190",
+          "0.196"
+        ],
+        [
+          "4.56",
+          "4.50",
+          "4.62"
+        ],
+        [
+          "7.18",
+          "7.14",
+          "7.22"
+        ],
+        [
+          "4.71",
+          "4.67",
+          "4.76"
+        ],
+        [
+          "6.35",
+          "6.28",
+          "6.41"
+        ],
+        [
+          "5.92",
+          "5.89",
+          "5.95"
+        ],
+        [
+          "0.20",
+          "0.18",
+          "0.22"
+        ],
+        [
+          "5.12",
+          "4.99",
+          "5.25"
+        ],
+        [
+          "8.68",
+          "8.37",
+          "9.01"
+        ],
+        [
+          "0.22",
+          "0.03",
+          "0.40"
+        ],
+        [
+          "0.289",
+          "0.286",
+          "0.292"
+        ],
+        [
+          "-7.31",
+          "-7.43",
+          "-7.18"
+        ],
+        [
+          "-4.16",
+          "-4.39",
+          "-3.94"
+        ],
+        [
+          "5.35",
+          "5.15",
+          "5.55"
+        ],
+        [
+          "7.29",
+          "7.14",
+          "7.43"
+        ],
+        [
+          "-2.83",
+          "-2.88",
+          "-2.78"
+        ],
+        [
+          "0.26",
+          "0.24",
+          "0.28"
+        ],
+        [
+          "8.39",
+          "8.27",
+          "8.51"
+        ],
+        [
+          "16.65",
+          "16.36",
+          "16.95"
+        ],
+        [
+          "8.00",
+          "7.88",
+          "8.13"
+        ],
+        [
+          "0.102",
+          "0.100",
+          "0.103"
+        ],
+        [
+          "0.05",
+          "0.05",
+          "0.06"
+        ],
+        [
+          "0.05",
+          "0.04",
+          "0.05"
+        ],
+        [
+          "20.03",
+          "20.03",
+          "20.04"
+        ],
+        [
+          "19.94",
+          "19.92",
+          "19.95"
+        ],
+        [
+          "20.17",
+          "20.17",
+          "20.18"
+        ]
+      ]
+    },
+    "tab:cnc_family_mismatch": {
+      "number": 15,
+      "caption": "Order-mix effects on feasibility errors by family.",
+      "block_sha256": "a267019692db1eac657ad3c3d83f84afef1fb760ea10ff1503464f1d0e591a1b",
+      "expected_numeric_rows": [
+        [
+          "-1.800",
+          "-1.882",
+          "-1.722"
+        ],
+        [
+          "-2.946",
+          "-3.154",
+          "-2.741"
+        ],
+        [
+          "1.595",
+          "1.490",
+          "1.699"
+        ],
+        [
+          "3.591",
+          "3.459",
+          "3.728"
+        ]
+      ]
+    },
+    "tab:cnc_capacity_endpoints": {
+      "number": 16,
+      "caption": "Assignment and supplier availability under combined pressure.",
+      "block_sha256": "86c4d2a4a48d3e83a613da011821e3ea53b9dda8f45394153a04fad1a12c8cfa",
+      "expected_numeric_rows": [
+        [
+          "99.99",
+          "99.88",
+          "99.97",
+          "99.78",
+          "99.99",
+          "99.79"
+        ],
+        [
+          "99.13",
+          "74.45",
+          "99.71",
+          "97.52",
+          "72.58",
+          "55.69"
+        ]
+      ]
+    },
+    "tab:parameter_settings": {
+      "number": 17,
+      "caption": "Parameter scenarios and profit comparisons.",
+      "block_sha256": "7f7d54e22cbc3f2805dce368413d54c54569cffce28e3d8bb0e270254573073d",
+      "expected_numeric_rows": [
+        [
+          "1.00",
+          "1.00",
+          "1.00",
+          "1.00"
+        ],
+        [
+          "1",
+          "0.50",
+          "0.50",
+          "0.85",
+          "0.80"
+        ],
+        [
+          "2",
+          "0.50",
+          "0.50",
+          "1.15",
+          "1.20"
+        ],
+        [
+          "3",
+          "0.50",
+          "1.50",
+          "0.85",
+          "1.20"
+        ],
+        [
+          "4",
+          "0.50",
+          "1.50",
+          "1.15",
+          "0.80"
+        ],
+        [
+          "5",
+          "1.50",
+          "0.50",
+          "0.85",
+          "1.20"
+        ],
+        [
+          "6",
+          "1.50",
+          "0.50",
+          "1.15",
+          "0.80"
+        ],
+        [
+          "7",
+          "1.50",
+          "1.50",
+          "0.85",
+          "0.80"
+        ],
+        [
+          "8",
+          "1.50",
+          "1.50",
+          "1.15",
+          "1.20"
+        ],
+        [
+          "52",
+          "2"
+        ],
+        [
+          "52",
+          "2"
+        ]
+      ]
+    },
+    "tab:parameter_decision": {
+      "number": 18,
+      "caption": "Payment-rule outcomes under combined pressure.",
+      "block_sha256": "757ff53b30b94c43083615c99742cda7d794b4c972d7605da10ce8adae857f5d",
+      "expected_numeric_rows": [
+        [
+          "78.05",
+          "475.82",
+          "99.65",
+          "75.22"
+        ],
+        [
+          "83.09",
+          "699.58",
+          "99.67",
+          "74.73"
+        ],
+        [
+          "7",
+          "76.32",
+          "456.93",
+          "96.06",
+          "62.23"
+        ],
+        [
+          "85.60",
+          "831.84",
+          "99.01",
+          "61.05"
+        ]
+      ]
+    }
+  },
+  "figures": {
+    "fig:solver_frontier": {
+      "number": 5,
+      "caption": "Solver accuracy, independent end-to-end runtime, and  profile saving across  the six benchmark scales.",
+      "block_sha256": "2697981f1e0c8ae04255d31ccaaf850d10abdfe7d660129c0d01502c670c5b06",
+      "asset_name": "solver_frontier.pdf",
+      "asset_sha256": "2f19ec66cd17bf3225ad9647d55e308ef055e0659a935b8efa5cb53828cd08a7"
+    },
+    "fig:scalability": {
+      "number": 6,
+      "caption": "Sparse-solver scalability with eight policies per manufacturer.",
+      "block_sha256": "89182b553329a9749612c8de972e6f78e8df7ec36d693b0b01016103c8c8124e",
+      "asset_name": "scalability.pdf",
+      "asset_sha256": "c33f761eafe19bb48d6a849a9a58b8e9458c6ededc90de9c1eff9d031e7d9463"
+    },
+    "fig:cnc_mechanism_tradeoffs": {
+      "number": 7,
+      "caption": "Outcomes under the four CNC auction mechanisms.",
+      "block_sha256": "04528b3f4cf3ce44706c43c5100e6a44698429dedadbd6bd3016b438b486cb7a",
+      "asset_name": "cnc_mechanism_levels.pdf",
+      "asset_sha256": "90eb34123f9f543073a70aa688bc8d6eb33e7399ce5f358024645c02afaf2359"
+    },
+    "fig:cnc_policy_composition": {
+      "number": 8,
+      "caption": "Policy shares in the computed distributions and assigned orders.",
+      "block_sha256": "cc3359a0a4fb7578a59918f9d08c32e97e808fc4989ec2df4be17afc45e52594",
+      "asset_name": "cnc_policy_composition_original_style.pdf",
+      "asset_sha256": "0230f48cde1baa32d214bce1e7f5061ecb322754f76fdf966117319ff10cef26"
+    }
+  },
+  "excluded_diagrams": {
+    "fig:predeployment_framework": {
+      "number": 1,
+      "reason": "Author excludes structural diagrams from reproducibility"
+    },
+    "fig:route_capacity_model": {
+      "number": 2,
+      "reason": "Author excludes structural diagrams from reproducibility"
+    },
+    "fig:dynamic_policy_interaction": {
+      "number": 3,
+      "reason": "Author excludes structural diagrams from reproducibility"
+    },
+    "fig:cce_matrix": {
+      "number": 4,
+      "reason": "Author excludes structural diagrams from reproducibility"
+    }
+  },
+  "definition_tables": "Model/policy/mechanism/fleet/order specifications remain in code/config docs; not numerical result tables",
+  "publication_channel": "GitHub only; no Zenodo or DOI"
+}

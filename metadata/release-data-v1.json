@@ -1,0 +1,18 @@
+{
+  "schema": "policy_cce_github_data_release_v1",
+  "repository": "Gaojinhan/policy-cce-reproducibility",
+  "release_tag": "data-v1",
+  "archive_name": "policy-cce-data-v1.tar.gz",
+  "archive_sha256": "82406129373f7be507560629d853bea80ad22f870809ca369f72848cec01a88d",
+  "archive_bytes": 547039780,
+  "member_count": 6162,
+  "uncompressed_bytes": 845731079,
+  "manifest_bytes": 6998562,
+  "manifest_sha256": "a0b5b46789c1a879a55ad82d57e4ccb07dc2a5c66b73438ab2d27127b4406ff7",
+  "top_level_directory": "offline-inputs-v1",
+  "payload_files": 6161,
+  "formal_jobs": 588,
+  "calibration_jobs": 24,
+  "visibility": "private",
+  "scope": "Immutable scientific data and original provenance; no credential payload found by the recorded targeted scan."
+}

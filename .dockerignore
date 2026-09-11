@@ -1,0 +1,16 @@
+**
+!Dockerfile
+!requirements.lock
+!pyproject.toml
+!MANIFEST.in
+!README.md
+!cmfg_cce/
+!cmfg_cce/**
+!policy_cce_repro/
+!policy_cce_repro/**
+!metadata/
+!metadata/**
+!docs/
+!docs/**
+**/__pycache__/**
+**/*.pyc

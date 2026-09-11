@@ -1,0 +1,93 @@
+experiment: scalable_queue_n4k8
+run_budget_label: full_tensor_audited_scalable_queue_n4k8
+env_version: core_v1
+
+population:
+  name: balanced
+  capacity_range: [50.0, 200.0]
+  c_base_range: [1.0, 5.0]
+  c_setup_range: [5.0, 20.0]
+  p_out_range: [0.05, 0.20]
+  alpha_range: [0.1, 1.5]
+
+orders:
+  workload_range: [5, 50]
+  due_date_range: [5, 30]
+
+outside_pressure:
+  mode: scalar_markov
+  decay: 0.90
+  shock_size_range: [0.05, 0.25]
+  max_pressure: 0.60
+
+policies:
+  markup_grid: [0.05, 0.10, 0.15, 0.20, 0.25, 0.30, 0.40]
+  lead_time_grid: [0.55, 0.70, 0.85, 1.00]
+
+mechanisms:
+  - M1_price_first
+  - M2_price_critical
+  - M3_delivery_first
+  - M4_delivery_critical
+
+mechanism_defaults:
+  reserve_price_multiplier: 1.75
+  single_bidder_markup_cap: 0.20
+  rho: 2.0
+  gamma: 0.99
+  beta_p: 0.6
+  beta_l: 0.4
+
+oracle_baselines:
+  N_values: [4]
+  policies_per_agent: [8]
+  horizon: 30
+  rollouts_per_profile: 20
+  seeds: [0, 1, 2]
+  solver_payoff_mode: independent_resimulate
+  solvers:
+    - ExhaustiveCG-CCE
+    - MWU-PolicyTrace
+    - RegretMatching-PolicyTrace
+    - REPAIR-SAD-CCE
+    - T-CARM-Nested-CCE
+    - HeuristicKKT-CG-CCE
+
+solver:
+  workers: 8
+  target_gap: 1.0e-8
+  active_sampling: false
+  rollouts_max: 20
+  mwu_rounds: 4096
+  regret_matching_rounds: 4096
+  t_carm_nested_iterations: 512
+  t_carm_nested_inner_iterations: 16
+  t_carm_nested_restarts: 4
+  initial_support_size: 16
+  max_support_size: 128
+  support_add_batch_size: 12
+  max_rounds: 5
+  certified_cg_max_iterations: 12
+  repair:
+    repair_rounds: 3
+    top_constraints: 5
+    top_profiles_per_constraint: 24
+    q_min: 1.0e-4
+    mean_threshold: 1.0
+    contribution_min: 0.0
+    enable_multi_agent_repair: true
+    max_agents_repaired_per_profile: 2
+    beam_width: 20
+    profile_budget_multiplier: 2.0
+    targeted_deviation_policies:
+      M1_price_first: [P8, P4]
+      M2_price_critical: [P8, P4]
+      M3_delivery_first: [D5]
+      M4_delivery_critical: [D1, D5]
+  heuristic_cg:
+    initial_support_size: 16
+    max_support_size: 128
+    max_iterations: 12
+    pricing_sample_size: 256
+    pricing_restarts: 12
+    pricing_local_steps: 5

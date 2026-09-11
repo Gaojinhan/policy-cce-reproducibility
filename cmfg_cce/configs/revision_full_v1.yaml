@@ -1,0 +1,204 @@
+campaign: revision-full-v1
+immutable: true
+
+statistics:
+  train_rollouts: 200
+  audit_rollouts: 2000
+  outcome_rollouts: 500
+  bootstrap_samples: 5000
+  alpha: 0.05
+  primary_bound: max_t_simultaneous_one_sided
+  sensitivity_bounds: [pointwise, bonferroni, across_game_bonferroni]
+  freeze_q_before_audit: true
+  paired_common_random_numbers: true
+  mechanism_inference_cluster: reporting_seed
+  mechanism_inference: [seed_cluster_t_interval, exact_sign_flip, holm_adjustment]
+  nonlinear_metrics_from_raw_counts: true
+
+seed_namespaces:
+  training: 0
+  mwu_tuning_audit: 15000000
+  formal_audit: 20000000
+  outcome_evaluation: 30000000
+  transplant_audit: 40000000
+
+solver_benchmark:
+  sizes: [[4, 6], [4, 8], [5, 6], [5, 8], [6, 6], [6, 8]]
+  mechanisms: [M1_price_first, M2_price_critical, M3_delivery_first, M4_delivery_critical]
+  seeds: [0, 1, 2]
+  solvers: [FullTensor-CCE-LP, ExhaustiveCG-CCE, MWU-PolicyTrace, REPAIR-SAD-CCE]
+  formal_audit_distributions:
+    - full_tensor_and_exhaustive_cg_shared_q
+    - mwu_policy_trace
+    - dss_cce
+  enumerate_pure_nash: true
+  weak_policy_dominance_diagnostic: true
+
+mixed_challenge:
+  N: 4
+  J: 6
+  seeds: [10, 11, 12, 13, 14]
+  variants:
+    - tight_capacity
+    - tight_due_dates
+    - high_core_pressure
+    - high_alpha_heterogeneity
+    - narrow_capacity
+  solvers: [FullTensor-CCE-LP, ExhaustiveCG-CCE, REPAIR-SAD-CCE, MWU-PolicyTrace]
+  formal_audit_distributions:
+    - full_tensor_and_exhaustive_cg_shared_q
+    - mwu_policy_trace
+    - dss_cce
+  diagnostics: [pure_nash_count, support_size, shannon_entropy, effective_support_size]
+  report_all_prespecified_games: true
+
+cnc_main:
+  N: 4
+  J: 6
+  seeds: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+  load_levels: [nominal, high]
+  order_mixes: [balanced, m5_edm_intensive]
+  outside_workload: [normal, high_outside_m5_g_edm]
+  formal_audit: true
+  independent_outcome_evaluation: true
+  outcome_inference:
+    matched_unit: [operating_condition, seed]
+    independent_cluster: seed
+    error_bars: seed_cluster_95_percent_ci
+    nonlinear_metrics: reconstruct_from_raw_counts_within_each_bootstrap_draw
+
+cce_selection_sensitivity:
+  N: 4
+  J: 6
+  operating_conditions:
+    - nominal__balanced__normal
+    - high__m5_edm_intensive__high_outside_m5_g_edm
+  mechanisms: [M1_price_first, M2_price_critical, M3_delivery_first, M4_delivery_critical]
+  seeds: [0, 1, 2, 3, 4]
+  selectors:
+    - platform_operating_score
+    - total_manufacturer_return
+    - max_entropy_posthoc
+  one_complete_table_per_condition_mechanism_seed: true
+  phases: [training, formal_audit, independent_outcome_evaluation]
+
+policy_transplant:
+  directions:
+    - [M1_price_first, M2_price_critical]
+    - [M2_price_critical, M1_price_first]
+    - [M3_delivery_first, M4_delivery_critical]
+    - [M4_delivery_critical, M3_delivery_first]
+  arms: [same_mechanism_control, cross_mechanism, target_recomputed]
+  audit_rollouts: 2000
+  paired_common_random_numbers_across_arms: true
+  primary_effects:
+    - cross_minus_same_mechanism_control_relative_gap
+    - cross_minus_target_recomputed_relative_gap
+
+policy_library_sensitivity:
+  operating_conditions:
+    - nominal__balanced__normal
+    - high__m5_edm_intensive__high_outside_m5_g_edm
+  seeds: [0, 1, 2, 3, 4]
+  mechanisms: [M1_price_first, M2_price_critical, M3_delivery_first, M4_delivery_critical]
+  variants:
+    - base_a1_a6
+    - expanded_a1_a8
+    - leave_out_a1
+    - leave_out_a2
+    - leave_out_a3
+    - leave_out_a4
+    - leave_out_a5
+    - leave_out_a6
+    - coefficient_scale_0p8
+    - coefficient_scale_1p2
+  phases: [training, formal_audit, independent_outcome_evaluation]
+  report_all_prespecified_variants: true
+  inference_scope: robustness_and_stability_not_five_percent_sign_flip_claims
+
+parameter_robustness:
+  design: resolution_iv_half_fraction_d_equals_abc_plus_base
+  operating_conditions:
+    - nominal__balanced__normal
+    - high__m5_edm_intensive__high_outside_m5_g_edm
+  seeds: [0, 1, 2, 3, 4]
+  mechanisms: [M1_price_first, M2_price_critical, M3_delivery_first, M4_delivery_critical]
+  cost_dispersion_scale: [0.5, 1.5]
+  alpha_scale: [0.5, 1.5]
+  effective_rate_scale: [0.85, 1.15]
+  policy_coefficient_scale: [0.8, 1.2]
+  phases: [training, formal_audit, independent_outcome_evaluation]
+  report_all_prespecified_settings: true
+  inference_scope: robustness_and_stability_not_five_percent_sign_flip_claims
+
+scalability:
+  exact_sizes: [[7, 6]]
+  sparse_sizes: [[8, 8], [10, 8], [12, 8]]
+  exact_mechanisms: [M1_price_first, M2_price_critical, M3_delivery_first, M4_delivery_critical]
+  sparse_mechanisms: [M1_price_first, M4_delivery_critical]
+  exact_solvers: [FullTensor-CCE-LP, ExhaustiveCG-CCE, MWU-PolicyTrace, REPAIR-SAD-CCE]
+  sparse_solvers: [MWU-PolicyTrace, REPAIR-SAD-CCE]
+  exact_formal_audit_distributions:
+    - full_tensor_and_exhaustive_cg_shared_q
+    - mwu_policy_trace
+    - dss_cce
+  sparse_formal_audit_distributions: [mwu_policy_trace, dss_cce]
+  seeds: [0, 1, 2]
+
+mwu_tuning:
+  tuning_sizes: [[4, 6], [5, 8], [6, 8]]
+  tuning_seeds: [100, 101]
+  mechanisms: [M1_price_first, M2_price_critical, M3_delivery_first, M4_delivery_critical]
+  eta: [0.03, 0.10, 0.30, 1.00]
+  schedule: [constant, inverse_sqrt]
+  exploration: [0.0, 0.05]
+  validation_audit_rollouts: 500
+  matched_dss_runtime: one_empty_cache_run_per_calibration_game
+  physical_pipeline_count: 24
+  mwu_configuration_evaluation_count: 384
+  one_global_configuration: true
+  selection: mean_fresh_max_t_relative_ucb_then_worst_then_mean_nominal_then_config_id
+  formal_selection_scope: hyperparameters_only
+  formal_mwu_budget: exactly_the_paired_empty_cache_dss_wall_time_per_game
+  formal_q_source: gcp_exclusive_runtime_job
+  completed_trace_rounds: reproduction_provenance_only
+
+campaign_job_granularity:
+  description: shared training tables and downstream stages are grouped into one worker pipeline
+  physical_total: 1768
+  runtime_contract: bulk evidence may run on all four machines; paper wall time uses fresh GCP-only attempts
+  gcp_exclusive_families:
+    - mwu_tuning_pipeline
+    - solver_benchmark_runtime
+    - scalability_exact_runtime
+    - scalability_sparse_runtime
+  physical_families:
+    mwu_tuning_pipeline: 24
+    solver_benchmark: 72
+    mixed_challenge: 100
+    cnc_main: 320
+    selection_sensitivity: 40
+    policy_transplant: 320
+    policy_library_sensitivity: 400
+    parameter_robustness: 360
+    scalability_exact: 12
+    scalability_sparse: 18
+    solver_benchmark_runtime: 72
+    scalability_exact_runtime: 12
+    scalability_sparse_runtime: 18
+
+design_counts:
+  mwu_calibration_games: 24
+  mwu_configuration_evaluations: 384
+  mwu_dss_runtime_references: 24
+  solver_benchmark_games: 72
+  exact_scalability_games: 12
+  sparse_scalability_games: 18
+  mixed_challenge_games: 100
+  cnc_main_games: 320
+  selection_sensitivity_base_games: 40
+  selection_sensitivity_selector_outputs: 120
+  policy_transplant_directions: 320
+  policy_library_combinations: 400
+  parameter_robustness_combinations: 360
+  gcp_exclusive_runtime_measurements: 102

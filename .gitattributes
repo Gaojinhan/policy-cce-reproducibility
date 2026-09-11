@@ -1,0 +1,4 @@
+* text=auto eol=lf
+# Frozen hashes are byte contracts, including on Windows checkouts.
+cmfg_cce/** -text
+metadata/** -text

@@ -1,0 +1,15 @@
+experiment: reviewer1_training_precision_calibration
+source_root: outputs/policy_library_full_queue_20260613_213147_policy_library_full
+frozen_audit_root: outputs/reviewer1_cce_audit_pilot
+output_root: outputs/reviewer1_training_precision_calibration
+
+train_rollouts: [20, 50, 100, 200]
+audit_seed_offset: 10000000
+bootstrap_samples: 2000
+alpha: 0.05
+workers: 8
+q_reproduction_tolerance: 1.0e-8
+
+cases:
+  - {N: 5, J: 8, seed: 0, mechanism: M2_price_critical, role: same_scale_control}
+  - {N: 5, J: 8, seed: 1, mechanism: M2_price_critical, role: dss_instability_case}

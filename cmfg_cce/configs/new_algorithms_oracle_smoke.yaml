@@ -1,0 +1,58 @@
+experiment: new_algorithms_oracle_smoke
+run_budget_label: new_algorithms_full_tensor_audit_smoke
+env_version: core_v1
+
+population:
+  name: balanced
+  capacity_range: [50.0, 200.0]
+  c_base_range: [1.0, 5.0]
+  c_setup_range: [5.0, 20.0]
+  p_out_range: [0.05, 0.20]
+  alpha_range: [0.1, 1.5]
+
+orders:
+  workload_range: [5, 50]
+  due_date_range: [5, 30]
+
+outside_pressure:
+  mode: scalar_markov
+  decay: 0.90
+  shock_size_range: [0.05, 0.25]
+  max_pressure: 0.60
+
+policies:
+  markup_grid: [0.05, 0.10, 0.15, 0.20, 0.25, 0.30, 0.40]
+  lead_time_grid: [0.55, 0.70, 0.85, 1.00]
+
+mechanisms:
+  - M1_price_first
+  - M2_price_critical
+  - M3_delivery_first
+  - M4_delivery_critical
+
+mechanism_defaults:
+  reserve_price_multiplier: 1.75
+  single_bidder_markup_cap: 0.20
+  rho: 2.0
+  gamma: 0.99
+  beta_p: 0.6
+  beta_l: 0.4
+
+oracle_baselines:
+  N_values: [4]
+  policies_per_agent: [6]
+  horizon: 30
+  rollouts_per_profile: 20
+  seeds: [0]
+  solver_payoff_mode: independent_resimulate
+  solvers:
+    - T-CARM-CCE
+    - CertifiedKKT-CG-CCE
+
+solver:
+  workers: 8
+  target_gap: 1.0e-8
+  initial_support_size: 1
+  t_carm_iterations: 500
+  t_carm_oracle_mode: exact
+  t_carm_audit_every: 100

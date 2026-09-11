@@ -1,0 +1,19 @@
+{
+  "schema": "policy_cce_optional_formal_rerun_inputs_v1",
+  "release_tag": "data-v1",
+  "repository": "Gaojinhan/policy-cce-reproducibility",
+  "campaign_manifest": {
+    "asset_name": "campaign-formal.json",
+    "bytes": 6192480,
+    "sha256": "2d2ff5730202f3f3fa8b4051f33b629271bfa84a2248978c91326e31317dcb97",
+    "campaign_sha256": "cc8e7f81c117c512cdb18f9993bc4b67960d7ac8a85d3329969ad550ff4b2ff9",
+    "original_job_count": 1744
+  },
+  "mwu_selection": {
+    "data_path": "metadata/mwu_selection.json",
+    "bytes": 18290,
+    "sha256": "50838fd60da47a324f53ba8c0b2755670f72d1c3ee4802e11215710abf73629c",
+    "selection_sha256": "d5630cd38581937146a10035b19054abb65adbd2296559008b0e4e8d776bb913"
+  },
+  "scope": "Original historical setup for explicitly selected formal reruns. Not the default 588-job paper data selection. Never launch the whole manifest by default."
+}
