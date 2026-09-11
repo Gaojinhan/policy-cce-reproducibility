@@ -1,6 +1,12 @@
-# Local validation
+# Validation history
 
 Validation date: 2026-09-11. This is a saved-data and packaging check, not a rerun of the formal experiments.
+
+## GitHub release validation: version 0.3.0
+
+The bounded simulator demo and complete saved-data reconstruction have passed on macOS ARM64 and in a Linux/AMD64 Docker container on GitHub Actions. Container computation runs with networking disabled and data mounted read-only. The data-v1 release archive was downloaded, checksum-verified and unpacked by the Linux runner. The versioned code release includes `release-validation.json` with the exact tested commit, Actions run, test counts and output hashes.
+
+The sections below retain the earlier local checks and their original artifact identities. Statements about work pending at those stages are historical. Public visibility, reuse licensing and a full formal-campaign rerun are outside the completed private release. GitHub is the only publication destination; no Zenodo archive or DOI is planned.
 
 ## Scientific parity
 
@@ -31,7 +37,7 @@ Tested wheel size: 404,153 bytes. SHA-256: `a7557b57cea51619ef38b39ff2ee7a92b52f
 
 The tested environment is macOS ARM64 with Python 3.12.14 and the package versions in `metadata/validated-environment.json`. The commands set the BLAS thread environment to one per statistical worker; the full-data validation used two workers.
 
-The local NumPy build emitted divide/overflow/invalid warnings at some matrix multiplications, including tests with small finite inputs. All checked results remained finite and passed the fixed-tolerance comparisons. These warnings and dependency deprecation warnings remain in the logs. Their cause was not established, and they were not suppressed or treated as a reason to alter the calculations. Linux/AMD64 validation is a separate pending release check.
+The local NumPy build emitted divide/overflow/invalid warnings at some matrix multiplications, including tests with small finite inputs. All checked results remained finite and passed the fixed-tolerance comparisons. These warnings and dependency deprecation warnings remain in the logs. Their cause was not established, and they were not suppressed or treated as a reason to alter the calculations. Linux/AMD64 validation was still pending at this local stage; it is covered by the later release checks above.
 
 ## Result-display stage: version 0.2.0
 
@@ -41,10 +47,10 @@ All **167 tests passed**, including the optional full-data benchmark join test; 
 
 The full-precision evidence and generated-file hashes are in `reproducibility-prep/paper-render-v1/final/paper-report.json`; the complete test log and XML are in the same stage directory. Version 0.2.0 uses `metadata/paper-layout-v2.json`. The earlier display contract and first statistical-stage validation records remain unchanged. An installed-wheel run has its own evidence and is not implied by the checkout tests or the historical version 0.1.0 installation above.
 
-PDF byte equality across environments is not required: PDF timestamps, installed fonts and backend metadata can differ. Numerical inputs, plotted values, table output and original scientific identities are checked separately. The current validation platform is macOS ARM64.
+PDF byte equality across environments is not required: PDF timestamps, installed fonts and backend metadata can differ. Numerical inputs, plotted values, table output and original scientific identities are checked separately. This local-stage validation platform was macOS ARM64.
 
 ## What this does not verify
 
-No new payoff simulation, LP solve, training or original Runtime measurement was performed. The Runtime and parameter-robustness results were verified as archived records, not independently rerun. A bounded demo, Docker, Linux/AMD64 checks and full formal-job execution remain pending. Public-data review, licenses and the GitHub release also remain pending. Publication is GitHub-only: Zenodo and a DOI are not planned.
+The saved-data validation does not rerun payoff simulation, LP solves, training or original Runtime measurements. Runtime and parameter-robustness results are verified as archived records. The separate bounded demo performs a small synthetic simulation and LP solve; it does not reproduce a formal paper experiment. Full formal-job execution, public-data review and additional reuse licensing remain outside this private release.
 
 Saved statistical parity does not fill missing actual-executor provenance or establish that a historical scientific result should be interpreted more broadly than the fixed case and policy library.

@@ -335,7 +335,11 @@ def _plot_mechanisms(panels, destination):
                 axis.text(0, .45 * (ymax + .23 * span), "N/A", ha="center", color=muted, weight="bold")
                 axis.axhline(0, color=".6", lw=.7)
             axis.set_title(f"({chr(97 + index)}) {panel['title']}", pad=12)
-            axis.set_ylabel(panel["unit"])
+            # Keep the long lead-time label inside its own panel on PDF and PNG.
+            unit = panel["unit"]
+            if unit == "Difference from requested due time (%)":
+                unit = "Difference from requested\ndue time (%)"
+            axis.set_ylabel(unit)
             axis.set_xticks([0, 1], ["Price only", "Price + delivery"])
             axis.set_xlim(-.52, 1.52)
             axis.grid(axis="y", color="#d9e0e5", lw=.7)

@@ -1,4 +1,4 @@
-"""Deterministic CNC presentation checks; no PDFs or scientific runs are made."""
+"""Deterministic CNC presentation checks; no scientific runs are made."""
 import copy
 from pathlib import Path
 import tempfile
@@ -9,7 +9,7 @@ from policy_cce_repro.offline import DataError
 from policy_cce_repro.paper_cnc import (
     AVAIL, FACTOR_METRICS, MECHANISM_PANELS, MECHANISMS, RELATIVE_METRICS,
     _audit_rows, _capacity_table, _endpoint_table, _family_table, _interval,
-    _mechanism_figure_data, _policy_figure_data, _relative_table,
+    _mechanism_figure_data, _plot_mechanisms, _policy_figure_data, _relative_table,
     _transplant_table, build_cnc,
 )
 
@@ -158,6 +158,25 @@ class CNCUnitsTests(unittest.TestCase):
 
 
 class CNCAssemblyTests(unittest.TestCase):
+    def test_mechanism_axis_labels_fit_their_panels_without_changing_units(self):
+        from matplotlib.figure import Figure
+
+        panels = _mechanism_figure_data(outcomes_fixture())
+        formats = []
+
+        def inspect(figure, stream, **kwargs):
+            figure.canvas.draw()
+            renderer = figure.canvas.get_renderer()
+            for axis, panel in zip(figure.axes, panels, strict=True):
+                label = axis.yaxis.label
+                self.assertEqual(" ".join(label.get_text().split()), panel["unit"])
+                self.assertLessEqual(label.get_window_extent(renderer).height, axis.bbox.height)
+            formats.append(kwargs["format"])
+
+        with tempfile.TemporaryDirectory() as directory, patch.object(Figure, "savefig", inspect):
+            _plot_mechanisms(panels, Path(directory) / "mechanisms")
+        self.assertEqual(formats, ["pdf", "png"])
+
     def test_upper_bound_belongs_to_largest_gap_case_not_largest_bound(self):
         records = []
         for mechanism in MECHANISMS:
